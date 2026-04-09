@@ -656,5 +656,18 @@ const products = [
       "apparel",
       "mens"
     ]
+  }, {
+    id: "backpackid",
+    image: "images/products/backpack.jpg",
+    name: "Black Backpack",
+    rating: {
+      stars: 4.5,
+      count: 154
+    },
+    priceCents: 1990,
+    keywords: [
+      "backpack",
+      "black backpack"
+    ]
   }
 ];
