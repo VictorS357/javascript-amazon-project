@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 let productsHTML = '';
@@ -62,54 +62,41 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid')
     .innerHTML = productsHTML;
 
+function updateCartNumber () {
+  let cartQuantity = 0;
+
+    cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+    });
+
+    document.querySelector('.js-cart-quantity')
+      .innerHTML = cartQuantity;
+}
+
+function addMessageDisplay (productId) {
+  const addedDisplayElement = document.querySelector(`.js-added-display-${productId}`);
+  let addedMsg = addedDisplayElement.innerHTML;
+  addedMsg = 'Added';
+  addedDisplayElement.classList.add('added-class');
+
+  const previousTimeoutId = addedMessageTimeouts[productId];
+  if (previousTimeoutId) {
+    clearTimeout(previousTimeoutId);
+  }
+  const timeoutId = setTimeout(() => {
+    addedDisplayElement.classList.remove('added-class');
+  }, 2000);
+
+  addedMessageTimeouts[productId] = timeoutId;
+}
+
 const addedMessageTimeouts = {};
 document.querySelectorAll('.js-add-to-cart-btn')
   .forEach((button) => {
     button.addEventListener('click', () => {
       const { productId } = button.dataset;
-
-      let matchingItem;
-
-      const quantitySelectorElement = document.querySelector(`.js-quantity-selector-${productId}`);
-      const selectorValue = quantitySelectorElement.value
-
-      cart.forEach((item) => {
-        if (productId === item.productId) {
-          matchingItem = item;
-        }
-      });
-
-      if (matchingItem) {
-        matchingItem.quantity += Number(selectorValue);
-      } else {
-        cart.push({
-          productId,
-          quantity: Number(selectorValue)
-        });
-      }
-
-      let cartQuantity = 0;
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
-
-      const addedDisplayElement = document.querySelector(`.js-added-display-${productId}`);
-      let addedMsg = addedDisplayElement.innerHTML;
-      addedMsg = 'Added';
-      addedDisplayElement.classList.add('added-class');
-
-      const previousTimeoutId = addedMessageTimeouts[productId];
-      if (previousTimeoutId) {
-        clearTimeout(previousTimeoutId);
-      }
-      const timeoutId = setTimeout(() => {
-        addedDisplayElement.classList.remove('added-class');
-      }, 2000);
-
-      addedMessageTimeouts[productId] = timeoutId;
+      addToCart(productId);
+      updateCartNumber();
+      addMessageDisplay(productId);
     });
   });
