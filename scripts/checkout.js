@@ -1,4 +1,7 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, calculateCheckoutItems } from '../data/cart.js';
+
+calculateCheckoutItems();
+
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -13,6 +16,8 @@ cart.forEach ((cartItem) => {
     if (product.id === productId) {
       matchingProduct = product;
     }
+
+    calculateCheckoutItems();
   });
 
   cartSummaryHTML += `
@@ -106,5 +111,24 @@ document.querySelectorAll('.js-delete-link')
       removeFromCart(productId);
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
+      calculateCheckoutItems();
     });
   });
+
+  /*
+function updateCartNumber () {
+  let cartQuantity = 0;
+
+  cart.forEach((cartItem) => {
+    cartQuantity += cartItem.quantity;
+
+  document.querySelector('.js-cart-number-link')
+    .innerHTML = `${cartQuantity} items`;
+  });
+
+  if (cartQuantity === 0) {
+    document.querySelector('.js-cart-number-link')
+    .innerHTML = `${cartQuantity} items`;
+  }
+}
+*/
