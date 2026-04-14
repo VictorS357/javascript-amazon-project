@@ -16,6 +16,8 @@ export function calculateSiteCartNumber() {
 
   document.querySelector('.js-cart-quantity')
     .innerHTML = cartQuantity;
+
+  return cartQuantity;
 }
 
 export function calculateCheckoutItems() {
@@ -31,9 +33,23 @@ export function calculateCheckoutItems() {
     document.querySelector('.js-cart-number-link')
       .innerHTML = `${cartQuantity} items`;
   }
+
+  return cartQuantity;
 }
 
+export function updateQuantity(productId, newQuantity) {
+  let matchingItem;
 
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.quantity = newQuantity;
+
+  saveToStorage();
+}
 
 
   

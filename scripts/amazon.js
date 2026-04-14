@@ -64,18 +64,7 @@ products.forEach((product) => {
   
 document.querySelector('.js-products-grid')
     .innerHTML = productsHTML;
-/*
-function updateCartNumber() {
-  let cartQuantity = 0;
 
-  cart.forEach((cartItem) => {
-    cartQuantity += cartItem.quantity;
-  });
-
-  document.querySelector('.js-cart-quantity')
-    .innerHTML = cartQuantity;
-}
-*/
 function addMessageDisplay(productId) {
   const addedDisplayElement = document.querySelector(`.js-added-display-${productId}`);
   let addedMsg = addedDisplayElement.innerHTML;
