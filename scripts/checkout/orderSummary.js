@@ -1,8 +1,8 @@
 import { cart, removeFromCart, calculateCheckoutItems, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products, getProducts } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOption } from '../../data/deliveryOption.js';
+import { deliveryOption, getDeliveryOption } from '../../data/deliveryOption.js';
 
 calculateCheckoutItems();
 
@@ -15,26 +15,11 @@ export function renderOrderSummary() {
 
   cart.forEach ((cartItem) => {
     const { productId } = cartItem;
-    let matchingProduct;
-    products.forEach((product) => {
-      
-
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-
-      calculateCheckoutItems();
-    });
+    const matchingProduct = getProducts(productId)
 
     const { deliveryOptionId } = cartItem;
 
-    let deliveryOptionss;
-
-    deliveryOption.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        deliveryOptionss = option;
-      }
-    });
+    const deliveryOptionss = getDeliveryOption(deliveryOptionId);
 
     const today = dayjs();
     const deliveryDate = today.add(
