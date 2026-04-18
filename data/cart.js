@@ -33,7 +33,7 @@ export function calculateCheckoutItems() {
     .innerHTML = `${cartQuantity} items`;
   if (cartQuantity === 0) {
     document.querySelector('.js-cart-number-link')
-      .innerHTML = `${cartQuantity} items`;
+      .innerHTML = `0 items`;
   }
 
   return cartQuantity;
