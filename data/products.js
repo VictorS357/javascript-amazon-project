@@ -94,7 +94,7 @@ export function loadProductsFetch() {
 
     console.log('load products');
   }).catch((error) => {
-    console.log('Unexpected error. Please try again later.');
+    console.log(error);
   });
 
   return promise;
