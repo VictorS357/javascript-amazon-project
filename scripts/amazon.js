@@ -92,7 +92,9 @@ function renderProductsGrid() {
     .forEach((button) => {
       button.addEventListener('click', () => {
         const { productId } = button.dataset;
-        addToCart(productId);
+        const quantitySelectorElementValue = document.querySelector(`.js-quantity-selector-${productId}`).value;
+        const quantity = Number(quantitySelectorElementValue);
+        addToCart(productId, quantity);
         calculateSiteCartNumber();
         addMessageDisplay(productId);
       });

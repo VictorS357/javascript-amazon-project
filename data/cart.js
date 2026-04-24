@@ -71,10 +71,8 @@ function saveToStorage() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-export function addToCart (productId) {
+export function addToCart (productId, quantity) {
   let matchingItem;
-
-    const quantitySelectorElementValue = document.querySelector(`.js-quantity-selector-${productId}`).value;
 
     cart.forEach((cartItem) => {
       if (productId === cartItem.productId) {
@@ -83,11 +81,11 @@ export function addToCart (productId) {
     });
 
     if (matchingItem) {
-      matchingItem.quantity += Number(quantitySelectorElementValue);
+      matchingItem.quantity += quantity;
     } else {
       cart.push({
         productId,
-        quantity: Number(quantitySelectorElementValue),
+        quantity: quantity,
         deliveryOptionId: '1'
       });
     }
