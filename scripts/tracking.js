@@ -68,6 +68,12 @@ async function loadPage() {
 
   document.querySelector('.js-order-tracking')
     .innerHTML = trackHTML;
+
+  document.querySelector('.js-search-btn')
+  .addEventListener('click', () => {
+    const search = document.querySelector('.js-search-bar').value;
+    window.location.href = `amazon.html?search=${search}`;
+  });
 }
 
 loadPage();
