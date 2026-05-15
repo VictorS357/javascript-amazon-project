@@ -1,3 +1,3 @@
-# Projeto Clone da Amazon
+# Projeto Ecommerce Frontend
 
-Confira a aplicação em execução: [Clique aqui para acessar o projeto online](https://victors357.github.io/javascript-amazon-project/)
+Confira a aplicação em execução: [Clique aqui para acessar o projeto online](https://victors357.github.io/frontend-store-project/)
